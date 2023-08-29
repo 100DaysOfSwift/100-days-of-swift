@@ -49,3 +49,27 @@ let driving = { (place: String) in
 }
 
 driving("seoul")
+
+// 
+func travel(action: () -> Void) {
+    print("I'm getting ready to go.")
+    action()
+    print("I arrived!")
+}
+travel(action: {print("yeahhhhhh")})
+
+// trailing closure syntax
+
+
+// last param이 closure면, trailing closure 문법 사용
+travel() {
+    print("I'm driving in my car")
+}
+
+// last param이 클로져이면서 다른 파라미터가 없다면 괄호 아예 생략
+travel {
+    print("I'm driving in my car")
+}
+
+
+
