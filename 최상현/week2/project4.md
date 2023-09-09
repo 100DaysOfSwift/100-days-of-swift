@@ -5,7 +5,7 @@
 - UIAlertController
 - ..
 
-## Creationg a simple browser with WKWebView
+## Creating a simple browser with WKWebView
 
 ```swift
 
