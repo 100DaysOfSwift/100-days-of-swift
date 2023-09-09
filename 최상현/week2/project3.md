@@ -64,4 +64,14 @@ class DetailViewController: UIViewController {
 -  value에는 사진앱 허용 요청에 대한 안내 메시지를 작성
 
 
+## Quiz
 
+1. view controller 를 호출하는 방법은. `present(vc, anitmated: true)` 다.
+2. target parameter는 action method가 어디있는지를 나타낸다
+3. 모든 view controller 는 각자의 navigationItem을 가진다
+4. @objc 마킹은 objective-c에 의해 접근되어야하는 메서드에 해야만 한다
+5. Activity view controllers 는 ipad에 있는 것으로 부터 제공되어야 한다 (?)
+6. #selector 는 swift에게 메서드의 존재여부를 빌드 타임때 확인하게 한다
+7. activity view controller 는 컨텐츠를 SNS에 공유할 수 있게 한다
+8. Image views 안에 image가 있을 수도, 없을 수도 있다
+9. @IBAction automatically implies @objc
