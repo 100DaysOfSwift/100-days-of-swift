@@ -148,3 +148,106 @@ logger2()
 - unowned : captured value 가 클로저가 호출되는동안 절대 사라지지않는다고 확신할 때
 - weak : strong ref cycle 이 존재할 때는 순환 사이클 중 1개는 weak 이어야 한다
 - strong : cycle 이 발생하지 않는다고 확신할 때
+
+
+# project 5.
+
+## ~index path
+
+```swift
+import UIKit
+
+class ViewController: UITableViewController {
+    var allWords = [String]()
+    var usedWords = [String]()
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add
+                                                            , target: self, action: #selector(promptForAnswer))
+        
+        
+        if let startWordsURL = Bundle.main.url(forResource: "start", withExtension: "txt") {
+            if let startWords = try? String(contentsOf: startWordsURL) {
+                //                try? : code call. error가 나면 대신 nil을 달라
+                allWords = startWords.components(separatedBy: "\n")
+            }
+        }
+        
+        if allWords.isEmpty {
+            allWords = ["silkworm"]
+        }
+        
+        startGame()
+    }
+    
+    func startGame() {
+        title = allWords.randomElement()
+        usedWords.removeAll(keepingCapacity: true)
+        tableView.reloadData()
+        // ReloadData() : cellForRowAt와 numberOfRowsInSection 를 다시 부름
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return usedWords.count
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Word", for: indexPath)
+        cell.textLabel?.text = usedWords[indexPath.row]
+        return cell
+    }
+    @objc func promptForAnswer() {
+        // UIBarButtonItem에서 쓰여야하므로 @objc
+        let ac = UIAlertController(title: "Enter answer", message: nil, preferredStyle: .alert)
+        
+        // text input field를 알럿에 추가
+        ac.addTextField()
+
+        
+        // 버튼에 대한 액션을 등록
+        let submitAction = UIAlertAction(title: "Submit", style: .default) {
+            [weak self, weak ac] action in
+            guard let answer = ac?.textFields?[0].text else { return }
+            self?.submit(answer)
+        }
+
+        ac.addAction(submitAction)
+        present(ac, animated: true)
+    }
+    
+    func submit(_ answer: String) {
+        let lowerAnswer = answer.lowercased()
+        
+        if isPossible(word: lowerAnswer) {
+            if isOriginal(word: lowerAnswer) {
+                if isReal(word: lowerAnswer) {
+                    usedWords.insert(answer, at: 0)
+                    
+                    let indexPath = IndexPath(row: 0, section: 0)
+                    
+                    // indexpath : top of page view
+                    // insertRows() 를 하면 reloadData() 를 하지않아도 table에 새로운 row가
+                    // 추가되는 것을 애니메이션으로 보여줄 수 있다.
+                    tableView.insertRows(at: [indexPath], with: .automatic)
+                }
+            }
+        }
+    }
+    
+    func isPossible(word: String) -> Bool {
+        return true
+    }
+    
+    func isOriginal(word: String) -> Bool {
+        return true
+    }
+    
+    func isReal(word: String) -> Bool {
+        return true
+    }
+}
+
+```
