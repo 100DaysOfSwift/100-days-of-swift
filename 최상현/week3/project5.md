@@ -251,3 +251,38 @@ class ViewController: UITableViewController {
 }
 
 ```
+## validation 구현
+
+```swift
+func isPossible(word: String) -> Bool {
+        guard var tempWord = title?.lowercased() else { return false }
+
+        for letter in word {
+            if let position = tempWord.firstIndex(of: letter) {
+                // tempWord 에 있다면 tempWord에서 제거함
+                tempWord.remove(at: position)
+            } else {
+                // 없으면 불가능
+                return false
+            }
+        }
+
+        return true
+    }
+    
+    func isOriginal(word: String) -> Bool {
+        return !usedWords.contains(word)
+    }
+    
+    func isReal(word: String) -> Bool {
+        // UITextChecker : UIKit에 있는 문법 검사기. 실제 단어인지를 확인 가능
+        let checker = UITextChecker()
+        // string range를 저장하는 구조체
+        let range = NSRange(location: 0, length: word.utf16.count)
+        // 1st param: 검사 단어 2nd: 스캔범위, 마지막: 언어
+        let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+        // 리턴값도 NSRange 이며, misspelling 의 위치를 가지고 있음
+        // 따라서, NSNotFound 는 단어 자체가 valid함을 의미함.
+        return misspelledRange.location == NSNotFound
+    }
+```
