@@ -123,3 +123,27 @@ let width = 150
             }
         }
 ```
+
+
+## submit clear button 기능 구현
+```swift
+    @objc func letterTapped(_ sender: UIButton) {
+    }
+
+    @objc func submitTapped(_ sender: UIButton) {
+    }
+
+    @objc func clearTapped(_ sender: UIButton) {
+    }
+    override func loadView() {
+        
+        let submit = UIButton(type: .system)
+        submit.translatesAutoresizingMaskIntoConstraints = false
+        submit.setTitle("제출", for: .normal)
+        
+        // press down button? call submitTapped function on current controller
+        submit.addTarget(self, action: #selector(submitTapped), for: .touchUpInside)
+        
+        view.addSubview(submit)
+    }
+```
