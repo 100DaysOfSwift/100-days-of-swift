@@ -99,29 +99,29 @@ answersLabel.setContentHuggingPriority(UILayoutPriority(1), for: .vertical)
 - 버튼 세팅을 위해 CGRect 의 x,y 좌표계를 활용
 ```swift
 let width = 150
-        let height = 80
+let height = 80
 
-        // create 20 buttons as a 4x5 grid
-        for row in 0..<4 {
-            for col in 0..<5 {
-                // create a new button and give it a big font size
-                let letterButton = UIButton(type: .system)
-                letterButton.titleLabel?.font = UIFont.systemFont(ofSize: 36)
+// create 20 buttons as a 4x5 grid
+for row in 0..<4 {
+    for col in 0..<5 {
+        // create a new button and give it a big font size
+        let letterButton = UIButton(type: .system)
+        letterButton.titleLabel?.font = UIFont.systemFont(ofSize: 36)
 
-                // give the button some temporary text so we can see it on-screen
-                letterButton.setTitle("WWW", for: .normal)
+        // give the button some temporary text so we can see it on-screen
+        letterButton.setTitle("WWW", for: .normal)
 
-                // calculate the frame of this button using its column and row
-                let frame = CGRect(x: col * width, y: row * height, width: width, height: height)
-                letterButton.frame = frame
+        // calculate the frame of this button using its column and row
+        let frame = CGRect(x: col * width, y: row * height, width: width, height: height)
+        letterButton.frame = frame
 
-                // add it to the buttons view
-                buttonsView.addSubview(letterButton)
+        // add it to the buttons view
+        buttonsView.addSubview(letterButton)
 
-                // and also to our letterButtons array
-                letterButtons.append(letterButton)
-            }
-        }
+        // and also to our letterButtons array
+        letterButtons.append(letterButton)
+    }
+}
 ```
 
 
@@ -146,4 +146,49 @@ let width = 150
         
         view.addSubview(submit)
     }
+```
+## letter button 에 데이터 매핑하는 기능 구현
+- level1,2.txt 파일을 가져오고, \n로 라인을 구분
+- 라인 별로 enumerated() 를 통해 array index와 value를 가져옴
+- replacingOccurrences(of: "|", with: "") 는 of를 with으로 변경하여 srtring 리턴
+- components(separatedBy:) 통해 HA|UNT|ED 를 ha,unt,ed 로 분리하여 letterBits에 담는다
+```swift
+func loadLevel() {
+    var clueString = ""
+    var solutionString = ""
+    var letterBits = [String]()
+
+    if let levelFileURL = Bundle.main.url(forResource: "level\(level)", withExtension: "txt") {
+        if let levelContents = try? String(contentsOf: levelFileURL) {
+            var lines = levelContents.components(separatedBy: "\n")
+            lines.shuffle()
+
+            for (index, line) in lines.enumerated() {
+                let parts = line.components(separatedBy: ": ")
+                let answer = parts[0]
+                let clue = parts[1]
+
+                clueString += "\(index + 1). \(clue)\n"
+
+                let solutionWord = answer.replacingOccurrences(of: "|", with: "")
+                solutionString += "\(solutionWord.count) letters\n"
+                solutions.append(solutionWord)
+
+                let bits = answer.components(separatedBy: "|")
+                letterBits += bits
+            }
+        }
+    }
+
+    cluesLabel.text = clueString.trimmingCharacters(in: .whitespacesAndNewlines)
+    answersLabel.text = solutionString.trimmingCharacters(in: .whitespacesAndNewlines)
+        
+    letterBits.shuffle()
+        
+    if letterBits.count == letterButtons.count {
+      for i in 0 ..< letterButtons.count {
+             letterButtons[i].setTitle(letterBits[i], for: .normal)
+      }
+    }
+}
 ```
