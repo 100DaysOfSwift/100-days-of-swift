@@ -192,3 +192,52 @@ func loadLevel() {
     }
 }
 ```
+
+
+## firstIndex and joined
+
+
+## property observer
+
+- `score` 0에서 계속 정답 찾으면 올라가는 변수
+- ` scoreLabel.text = "Score: \(score)"`
+- props 가 바뀔 떄 실행할 코드를 property observer 라 한다
+- `didSet` 과 `willSet`
+
+```swift
+var score = 0 {
+    didSet {
+        scoreLabel.text = "Score: \(score)"
+    }
+}
+```
+
+
+## wrap up
+
+### addTarget()
+- UIButton UISlider 등에 동작을 매핑. 특정 컨트롤에 의한 타겟 오브젝트와 액션을 지정
+- method는 objc 로 지정
+```swift
+import UIKit
+
+class ViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        let button = UIButton(type: .system)
+        button.setTitle("Tap me", for: .normal)
+        button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+
+        view.addSubview(button)
+
+        // Set button constraints or frame here
+    }
+
+    @objc func buttonTapped() {
+        print("Button tapped!")
+        // Handle the button tap event here
+    }
+}
+```
