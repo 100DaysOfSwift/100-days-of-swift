@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22154" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Usp-n3-AV5">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22130"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="VII-Ct-Ha8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Usp-n3-AV5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="C9D-Xp-tZZ">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="4Rg-ug-h1Y" kind="relationship" relationship="rootViewController" id="DNo-x5-OiY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="toO-3x-bEE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="789" y="82"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="QxI-cS-Qou">
+            <objects>
+                <tableViewController id="4Rg-ug-h1Y" customClass="ViewController" customModule="project1" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="6cf-2i-5RK">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="Picture" textLabel="gH7-o2-0av" rowHeight="42" style="IBUITableViewCellStyleDefault" id="oVW-Ig-b5a">
+                                <rect key="frame" x="0.0" y="50" width="393" height="42"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oVW-Ig-b5a" id="Uge-9W-Cof">
+                                    <rect key="frame" x="0.0" y="0.0" width="362.66666666666669" height="42"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" id="gH7-o2-0av">
+                                            <rect key="frame" x="20" y="0.0" width="334.66666666666669" height="42"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="4Rg-ug-h1Y" id="Q1X-3g-3sw"/>
+                            <outlet property="delegate" destination="4Rg-ug-h1Y" id="UA1-09-HeQ"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="j1C-QX-FAp"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="hRy-5l-gV9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1799.2366412213739" y="81.690140845070431"/>
+        </scene>
+        <!--Detail View Controller-->
+        <scene sceneID="TQZ-Ec-M3q">
+            <objects>
+                <viewController storyboardIdentifier="Detail" id="dIO-LL-AYV" customClass="DetailViewController" customModule="project1" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="R69-xF-cZD">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J4v-yr-aeL">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yGz-Db-VEc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="J4v-yr-aeL" firstAttribute="leading" secondItem="yGz-Db-VEc" secondAttribute="leading" id="9oC-DM-iVA"/>
+                            <constraint firstItem="J4v-yr-aeL" firstAttribute="trailing" secondItem="yGz-Db-VEc" secondAttribute="trailing" id="JYH-Fg-zoz"/>
+                            <constraint firstAttribute="bottom" secondItem="J4v-yr-aeL" secondAttribute="bottom" id="dan-DB-ska"/>
+                            <constraint firstItem="J4v-yr-aeL" firstAttribute="top" secondItem="R69-xF-cZD" secondAttribute="top" id="uvw-t7-N1Z"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="J4v-yr-aeL" id="zPb-Lf-SjT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RkF-az-Akd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2875.5725190839694" y="81.690140845070431"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
