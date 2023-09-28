@@ -16,38 +16,33 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dSl-QX-62H">
-                                <rect key="frame" x="84.666666666666686" y="244" width="224" height="114"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bbh-tt-5h8">
+                                <rect key="frame" x="96" y="103" width="200" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="us"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NO4-Bf-Kxp">
-                                <rect key="frame" x="84.666666666666686" y="388" width="224" height="114"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ued-s9-3B8">
+                                <rect key="frame" x="96" y="233" width="200" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="us"/>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wkr-hh-PIu">
-                                <rect key="frame" x="84.666666666666686" y="103" width="224" height="114"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcy-Hw-IP0">
+                                <rect key="frame" x="96" y="363" width="200" height="100"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="us"/>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                        <constraints>
-                            <constraint firstItem="NO4-Bf-Kxp" firstAttribute="centerX" secondItem="dSl-QX-62H" secondAttribute="centerX" id="1VT-gc-jAZ"/>
-                            <constraint firstItem="NO4-Bf-Kxp" firstAttribute="top" secondItem="dSl-QX-62H" secondAttribute="bottom" constant="30" id="8qQ-4q-bSo"/>
-                            <constraint firstItem="wkr-hh-PIu" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="MTB-Dq-cXc"/>
-                            <constraint firstItem="wkr-hh-PIu" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Yta-xV-osv"/>
-                            <constraint firstItem="dSl-QX-62H" firstAttribute="centerX" secondItem="wkr-hh-PIu" secondAttribute="centerX" id="bCT-n0-4ex"/>
-                            <constraint firstItem="dSl-QX-62H" firstAttribute="top" secondItem="wkr-hh-PIu" secondAttribute="bottom" constant="27" id="xqQ-37-pwe"/>
-                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="00h-VK-FIU"/>
                     <connections>
-                        <outlet property="button1" destination="wkr-hh-PIu" id="njh-tx-Uga"/>
-                        <outlet property="button2" destination="dSl-QX-62H" id="LtZ-GK-9nE"/>
-                        <outlet property="button3" destination="NO4-Bf-Kxp" id="S3c-ft-ASI"/>
+                        <outlet property="button1" destination="Bbh-tt-5h8" id="TyX-3b-rLt"/>
+                        <outlet property="button2" destination="ued-s9-3B8" id="zKq-VT-qgt"/>
+                        <outlet property="button3" destination="kcy-Hw-IP0" id="eBw-5w-cA8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
