@@ -45,11 +45,17 @@ class ViewController: UIViewController {
         button3.layer.borderColor = UIColor.lightGray.cgColor
 
         
-        askQuestion()
-        
+        askQuestion(action: nil)
+        // Missing argument for parameter 'action' in call
+        // 1. When using askQuestion() in viewDidLoad(), we could send it the parameter nil to mean "there is no UIAlertAction for this."
+        // 2. We could redefine askQuestion() so that the action has a default parameter of nil, meaning that if it isn't specified it automatically becomes nil.
+        // 2.
+        // askQuestion()
     }
     
-    func askQuestion() {
+    func askQuestion(action: UIAlertAction!) {
+        // 2.
+        // askQuestion(action: UIAlertAction! = nil)
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
         
@@ -59,7 +65,29 @@ class ViewController: UIViewController {
         
         title = countries[correctAnswer].uppercased()
     }
+    
+    
+    @IBAction func buttonTapped(_ sender: UIButton) {
+        var title: String
+        
+        if sender.tag == correctAnswer {
+            title = "Correct"
+            score += 1
+        } else {
+            title = "Wrong"
+            score -= 1
+        }
+        
+        let ac = UIAlertController(title: title, message: "Your score is \(score)", preferredStyle: .alert)
+        
+        ac.addAction(UIAlertAction(title: "Continue", style: .default, handler: askQuestion))
+        // UIAlertAction error
+        // What it means to say is that using a method for this closure is fine, but Swift wants the method to accept a UIAlertAction parameter saying which UIAlertAction was tapped.
 
+        
+        present(ac, animated: true)
+    }
+    
 
 }
 
