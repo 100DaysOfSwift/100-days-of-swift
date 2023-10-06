@@ -76,15 +76,35 @@ class ViewController: UITableViewController {
     }
     
     func isPossible(word: String) -> Bool {
+        guard var tempWord = title?.lowercased() else { return false }
+        
+        for letter in word {
+            if let position = tempWord.firstIndex(of: letter) {
+                tempWord.remove(at: position)
+            } else {
+                return false
+            }
+        }
+        
         return true
     }
     
     func isOriginal(word: String) -> Bool {
-        return true
+        return !usedWords.contains(word)
     }
     
     func isReal(word: String) -> Bool {
-        return true
+        let checker = UITextChecker()
+        let range = NSRange(location: 0, length: word.utf16.count)
+        // UITextChecker doesn't work well with Swift String.. they'd like to have Objective-C String
+        // Emoji: Swift strings -  1letter strings, UTF-16: 2letter strings
+        let misspelledRange = checker.rangeOfMisspelledWord(in: word, range: range, startingAt: 0, wrap: false, language: "en")
+        return misspelledRange.location == NSNotFound
+//        if misspelledRange.location == NSNotFound {
+//            return true
+//        } else {
+//            return false
+//        }
     }
 
 }
