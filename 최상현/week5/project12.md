@@ -66,3 +66,28 @@ func encode(with aCoder: NSCoder) {
 - required init 은 상속할 서브클래스들이 필수로 구현해야하는 메서드
 - encode는 저장할때, decodeObject는 생성자에서 값 로딩할 때 사용
 
+
+## Codable
+- NSCoding이 objC 포함된 스위프트 코드면 무난한 선택
+- 근데 swift만 쓴다면 codable protocol이 더 쉬운 선택
+
+### 왜냐
+1. Codable 은 struct에서도 동작함
+2. NSCoding은 생성자와 encode() 를 무조건 만들어야 했지만, Codable은 그럴필요 없음
+3. Codable 이용해 인코딩하면 NSCoding이랑 동일한 방식으로 인코딩 가능. 그러나 더 좋은 옵션은 JSON이긴 함
+
+# 문답
+1. Codable은 swift로만 호환됨
+2. UserDefault는 프로그램 세팅과 유저세팅을 한 곳에 저장할 수 있게 해줌
+3. 클로져 내에서 UserDefault로 저장이나 불러오기하면 안됨? -> No. 중요한건 멀티 스레드 동시성문제
+4. Nil coalescing 은 옵셔널이 nil일때의 default value 를 세팅하게 해줌
+5. app 실행 시 UserDefault 가 로딩 된다
+6. NSCoding은 key값으로 문자열ㅇ르 사용
+7. NSCoding을 순응하는 타입은 NSObject를 상속해야 한다
+8. UserDefaults 엔 민감정보를 담아선 안된다
+9. UserDefaults 에 너무 많은 정보를 담아선 안된다. 앱 성능에 영향을 미친다
+10. NSCoding 을 내 커스텀 클래스에 추가한다는건 새 생성자와 새 encode() 메서드의 구현이 필요하다
+11. JSONEncoder는 object -> Data type 으로 인코딩
+12. NSKeyedArchiver는 NSCoding 오브젝트를 Data 타입으로 컨버팅함
+13. 대부분의 swfit 기본 타입들은 NSCoding과 호환됨
+
