@@ -59,9 +59,17 @@ class ViewController: UIViewController {
             view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[\(label)]|", options: [], metrics: nil, views: viewsDictionary))
         }
         
+        let metrics = ["labelHeight": 88]
+        
         // V:|[label1]-[label2]-[label3]-[label4]-[label5]
         // leave the white space after the last label
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[label1]-[label2]-[label3]-[label4]-[label5]", options: [], metrics: nil, views: viewsDictionary))
+        
+        // V:|[label1(==88)]-[label2(==88)]-[label3(==88)]-[label4(==88)]-[label5(==88)]-(>=10)-|
+        // (==88) : size of the label ((88pt)
+        // -(>=10)- : space
+        
+        //@999 : priority999 - very important, but not required
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[label1(labelHeight@999)]-[label2(label1)]-[label3(label1)]-[label4(label1)]-[label5(label1)]-(>=10)-|", options: [], metrics: metrics, views: viewsDictionary))
 
     }
 
