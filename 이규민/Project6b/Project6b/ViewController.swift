@@ -51,28 +51,52 @@ class ViewController: UIViewController {
         view.addSubview(label4)
         view.addSubview(label5)
 
-        let viewsDictionary = ["label1": label1, "label2": label2, "label3": label3, "label4": label4, "label5": label5]
         
-        for label in viewsDictionary.keys {
-            // H:|[\(label)]| == edge of the (horizontal) view
-            // H - horizontal, `|` - edge
-            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[\(label)]|", options: [], metrics: nil, views: viewsDictionary))
+        // replace the chunck of the code below with the anchor method
+        
+        
+//        let viewsDictionary = ["label1": label1, "label2": label2, "label3": label3, "label4": label4, "label5": label5]
+//
+//        for label in viewsDictionary.keys {
+//            // H:|[\(label)]| == edge of the (horizontal) view
+//            // H - horizontal, `|` - edge
+//            view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[\(label)]|", options: [], metrics: nil, views: viewsDictionary))
+//        }
+//
+//        let metrics = ["labelHeight": 88]
+//
+//        // V:|[label1]-[label2]-[label3]-[label4]-[label5]
+//        // leave the white space after the last label
+//
+//        // V:|[label1(==88)]-[label2(==88)]-[label3(==88)]-[label4(==88)]-[label5(==88)]-(>=10)-|
+//        // (==88) : size of the label ((88pt)
+//        // -(>=10)- : space
+//
+//        //@999 : priority999 - very important, but not required
+//        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[label1(labelHeight@999)]-[label2(label1)]-[label3(label1)]-[label4(label1)]-[label5(label1)]-(>=10)-|", options: [], metrics: metrics, views: viewsDictionary))
+        
+        var previous: UILabel?
+        
+        for label in [label1, label2, label3, label4, label5] {
+            label.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+            label.heightAnchor.constraint(equalToConstant: 88).isActive = true
+            
+            if let previous = previous {
+                label.topAnchor.constraint(equalTo: previous.bottomAnchor, constant: 10).isActive = true
+            } else {
+                label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 0).isActive = true
+            }
+            
+            previous = label
         }
         
-        let metrics = ["labelHeight": 88]
-        
-        // V:|[label1]-[label2]-[label3]-[label4]-[label5]
-        // leave the white space after the last label
-        
-        // V:|[label1(==88)]-[label2(==88)]-[label3(==88)]-[label4(==88)]-[label5(==88)]-(>=10)-|
-        // (==88) : size of the label ((88pt)
-        // -(>=10)- : space
-        
-        //@999 : priority999 - very important, but not required
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[label1(labelHeight@999)]-[label2(label1)]-[label3(label1)]-[label4(label1)]-[label5(label1)]-(>=10)-|", options: [], metrics: metrics, views: viewsDictionary))
 
     }
 
-
+    // widthAnchor, heightAnchor, topAnchor, bottomAnchor, leftAnchor, rightAnchor, leadingAnchor, trailingAnchor, centerXAnchor, and centerYAnchor.
+    // leftAnchor == leadingAnchor, rightAnchor == trailingAnchor (written and read left to right)
+    // rightAnchor == leadingAnchor, leftAnchor == trailingAnchor (written and read right to left)
+    
+    
 }
 
