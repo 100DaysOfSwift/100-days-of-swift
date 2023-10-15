@@ -189,3 +189,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
 ```
 - 3번째 파라미터는 #selector 여야 한다
+
+# 정리
+1. UISlider를 배웠는데 valueChanged event로 값 변경 추적 가능
+2. CIContext는 생성할떄 비용많이 들기 때문에 재사용해야 좋음
+3. #selector 가 사용되는 메서드는 반드시 @objc 표시
+4. UIImagePickerController 에서 image 선택되면 `didFinishPickingMediaWithInfo` 콜백됨
+5. allowsEditing =true로 하면 사진 크롭 가능
+6. CIImage 는 어떤 변형을 적용할지의 레시피 같은 타입. UIImage와는 다름
+7. Core image 에서 이미지 읽으려면 CGImage -> UIImage 순서로 컨버팅필요
