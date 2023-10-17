@@ -98,5 +98,21 @@ class ViewController: UIViewController {
     }
 ```
 <img width="448" alt="image" src="https://github.com/100DaysOfSwift/100-days-of-swift/assets/40600306/d5335aab-2680-4c7e-a520-79cb58175c27">
+
+
 - 만약 콜아웃등 정상 동작안한다면 viewdidLoad() 내 이것을 추가. `mapView.delegate = self`
 
+
+# wrap up
+
+
+- map으로 할수 있는 다양한 것들이 많다
+- [placemark](https://www.hackingwithswift.com/example-code/location/adding-places-to-mkmapview-using-mkplacemark), [looking up locations](https://www.hackingwithswift.com/example-code/location/how-to-look-up-a-location-with-mklocalsearchrequest), and [finding directions](https://www.hackingwithswift.com/example-code/location/how-to-find-directions-using-mkmapview-and-mkdirectionsrequest)
+- map annotation 은 위경도 필수
+- MKPinAnnotationView 는 맵에 핀을 그리는 뷰
+- MKAnnotation 을 순응하는 것이 무엇이든 클래스여야 한다
+- detailDisclosure 라는 UIButton은 "i" 라는 링을 만든다. 좀더 디테일 제공하고자할때 씀
+- dequeueReusableAnnotationView(withIdentifier:) 는 nil을 리턴할수있다 
+- MapView는 사용자위치같이 우리가 만들지 않은 어노테이션도 가지고 있다
+- addTarget() 대신 `calloutAccessoryControlTapped` 로 메서드호출을 어노테이션뷰 내 버튼에 할당한다
+- MKMapViewDelegate 프로토콜이 MKMapView 를 컨트롤할수있는 법을 제공
