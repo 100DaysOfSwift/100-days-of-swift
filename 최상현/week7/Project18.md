@@ -14,3 +14,12 @@
 
 ## breakPoint
 -Cmd+8 = breakpoint navigator
+
+
+## view debug
+
+- view 계층구조 확인가능
+- 프로그레스바 조절 시 어떻게 view가 쌓여있는지 볼수 있음
+- 하단 디버그 메뉴에서 여러 면이 겹쳐진 버튼
+<img width="983" alt="image" src="https://github.com/100DaysOfSwift/100-days-of-swift/assets/40600306/82af0ed1-2c9d-4f0f-a2a4-1ea6318732ea">
+
