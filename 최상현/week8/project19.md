@@ -32,6 +32,10 @@ override func viewDidLoad() {
 ### info.plist
 
 <img width="660" alt="image" src="https://github.com/100DaysOfSwift/100-days-of-swift/assets/40600306/4f5b6a82-9d99-4553-ae32-317569aff94d">
+
+
+
+
 - String -> Dictionary
 - NSExtensionActivationSupportsWebPageWithMaxCount : String value 1 을 추가
 - 의미: 우리는 오로지 웹페이지만 받겠다
@@ -80,4 +84,33 @@ print(javaScriptValues)
 - js로부터 가져온 dictionary data 는 NSExtensionJavaScriptPreprocessingResultsKey 라는 이름의 키로 저장된다
 - 그 값을 가져오면, NSDictionary 로 형변환한다
 
+
+### keyboard 문제 해결
+- 빈칸을 계속 개행해 입력하다보면, 키보드 너머의 줄로 넘어가서 타이핑되어 화면에선 보이지는 않음
+- NotificationCenter를 이용해 상태변경을 알림
+- observer를 추가해 알람을 감지
+```swift
+let notificationCenter = NotificationCenter.default
+notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillChangeFrameNotification, object: nil)
+
+@objc func adjustForKeyboard(notification: Notification) {
+    guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+    let keyboardScreenEndFrame = keyboardValue.cgRectValue
+    let keyboardViewEndFrame = view.convert(keyboardScreenEndFrame, from: view.window)
+
+    if notification.name == UIResponder.keyboardWillHideNotification {
+        script.contentInset = .zero
+    } else {
+        script.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardViewEndFrame.height - view.safeAreaInsets.bottom, right: 0)
+    }
+
+    script.scrollIndicatorInsets = script.contentInset
+
+    let selectedRange = script.selectedRange
+    script.scrollRangeToVisible(selectedRange)
+}
+
+```
 
