@@ -49,24 +49,38 @@ class ViewController: UITableViewController {
                     return
                 }
             }
+            
+            self?.showError()
         }
         
-        showError()
+
     }
     
     func showError() {
-        let ac = UIAlertController(title: "Loading Error", message: "There was a problem loading the feed; please check your connection and try again", preferredStyle: .alert)
-        ac.addAction(UIAlertAction(title: "OK", style: .default))
-        present(ac, animated: true)
+        
+        // showError() creates and shows a UIAlertController – we now have user interface work happening on a background thread, which is always a bad idea.
+        // To fix this, 
+        DispatchQueue.main.async {
+            [weak self] in
+            let ac = UIAlertController(title: "Loading Error", message: "There was a problem loading the feed; please check your connection and try again", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "OK", style: .default))
+            self?.present(ac, animated: true)
+        }
+
     }
     
+    //  It's OK to parse the JSON on a background thread,
+    // but it's NEVER OK to do user interface work there.
     func parse(json: Data) {
         let decoder = JSONDecoder()
         
         if let jsonPetitions = try? decoder.decode(Petitions.self, from: json) {
             petitions = jsonPetitions.results
             
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                [weak self] in
+                self?.tableView.reloadData()
+            }
         }
     }
     
