@@ -38,16 +38,18 @@ class ViewController: UITableViewController {
         // The Utility queue: this should be used for long-running tasks that the user is aware of, but not necessarily desperate for now. If the user has requested something and can happily leave it running while they do something else with your app, you should use Utility.
         // The Background queue: this is for long-running tasks that the user isn't actively aware of, or at least doesn't care about its progress or when it completes.
         
+        // The async() method takes one parameter, which is a closure to execute asynchronously. We’re using trailing closure syntax, which removes an unneeded set of parentheses.
         DispatchQueue.global(qos: .userInitiated).async {
+            
+            // [weak self] isn’t necessary here because GCD runs the code once then throws it away – it won’t retain things used inside.
+            [weak self] in
             if let url = URL(string: urlString) {
                 if let data = try? Data(contentsOf: url) {
-                    self.parse(json: data)
+                    self?.parse(json: data)
                     return
                 }
             }
         }
-
-        showError()
         
         showError()
     }
