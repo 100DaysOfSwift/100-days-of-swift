@@ -83,4 +83,6 @@ func createFirework(xMovement: CGFloat, x: Int, y: Int) {
 - orientToPath 는 노드가 자동으로 회전하게 됨, 항상 경로 아래를 향하게 함
 
 
+https://www.hackingwithswift.com/read/20/3/swipe-to-select
+
 
