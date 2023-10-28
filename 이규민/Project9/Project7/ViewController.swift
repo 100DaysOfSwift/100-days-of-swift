@@ -13,6 +13,10 @@ class ViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        performSelector(inBackground: #selector(fetchJSON), with: nil)
+    }
+    
+    @objc func fetchJSON() {
         let urlString: String
         
         if navigationController?.tabBarItem.tag == 0 {
@@ -39,33 +43,25 @@ class ViewController: UITableViewController {
         // The Background queue: this is for long-running tasks that the user isn't actively aware of, or at least doesn't care about its progress or when it completes.
         
         // The async() method takes one parameter, which is a closure to execute asynchronously. We’re using trailing closure syntax, which removes an unneeded set of parentheses.
-        DispatchQueue.global(qos: .userInitiated).async {
-            
             // [weak self] isn’t necessary here because GCD runs the code once then throws it away – it won’t retain things used inside.
-            [weak self] in
+
             if let url = URL(string: urlString) {
                 if let data = try? Data(contentsOf: url) {
-                    self?.parse(json: data)
+                    parse(json: data)
                     return
                 }
             }
-            
-            self?.showError()
+        performSelector(onMainThread: #selector(showError), with: nil, waitUntilDone: false)
         }
-        
-
-    }
     
-    func showError() {
+    
+    @objc func showError() {
         
         // showError() creates and shows a UIAlertController – we now have user interface work happening on a background thread, which is always a bad idea.
-        // To fix this, 
-        DispatchQueue.main.async {
-            [weak self] in
-            let ac = UIAlertController(title: "Loading Error", message: "There was a problem loading the feed; please check your connection and try again", preferredStyle: .alert)
-            ac.addAction(UIAlertAction(title: "OK", style: .default))
-            self?.present(ac, animated: true)
-        }
+        // To fix this,
+        let ac = UIAlertController(title: "Loading Error", message: "There was a problem loading the feed; please check your connection and try again", preferredStyle: .alert)
+        ac.addAction(UIAlertAction(title: "OK", style: .default))
+        present(ac, animated: true)
 
     }
     
@@ -76,11 +72,9 @@ class ViewController: UITableViewController {
         
         if let jsonPetitions = try? decoder.decode(Petitions.self, from: json) {
             petitions = jsonPetitions.results
-            
-            DispatchQueue.main.async {
-                [weak self] in
-                self?.tableView.reloadData()
-            }
+            tableView.performSelector(onMainThread: #selector(UITableView.reloadData), with: nil, waitUntilDone: false)
+        } else {
+            performSelector(onMainThread: #selector(showError), with: nil, waitUntilDone: false)
         }
     }
     
