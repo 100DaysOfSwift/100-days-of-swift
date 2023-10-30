@@ -9,6 +9,6 @@ import UIKit
 
 class PersonCell: UICollectionViewCell {
     @IBOutlet var name: UILabel!
-    @IBOutlet var ImageView: UIImageView!
+    @IBOutlet var imageView: UIImageView!
     
 }
